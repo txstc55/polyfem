@@ -124,6 +124,7 @@ namespace cppoptlib
 	{
 		POLYFEM_SCOPED_TIMER("linear solve", this->inverting_time);
 		// TODO: get the correct size
+		std::cout << "Analyze pattern of hessian" << std::endl;
 		linear_solver->analyzePattern(hessian, hessian.rows());
 
 		try

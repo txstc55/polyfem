@@ -204,6 +204,7 @@ namespace polyfem
 					assembler_.assemble_mass_matrix(formulation_, size_ == 3, n_basis_, false, bases_, gbases_, ass_vals_cache_, mass);
 					auto solver = LinearSolver::create(solver_, preconditioner_);
 					solver->setParameters(solver_params_);
+					std::cout << "Analyze pattern from time_bc" << std::endl;
 					solver->analyzePattern(mass, mass.rows());
 					solver->factorize(mass);
 
@@ -386,6 +387,7 @@ namespace polyfem
 						Eigen::VectorXd coeffs(b.rows(), 1);
 						auto solver = LinearSolver::create(solver_, preconditioner_);
 						solver->setParameters(solver_params_);
+						std::cout << "Analyze pattern from lsq_bc" << std::endl;
 						solver->analyzePattern(A, A.rows());
 						solver->factorize(A);
 						coeffs.setZero();
