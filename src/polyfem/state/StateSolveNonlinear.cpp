@@ -135,9 +135,9 @@ namespace polyfem
 
 			logger().info("{}/{}  t={}", t, time_steps, t0 + dt * t);
 			solve_data.time_integrator->save_raw(
-			resolve_output_path(args["output"]["data"]["u_path"] + "_" + std::to_string(t * dt)),
-			resolve_output_path(args["output"]["data"]["v_path"] + "_" + std::to_string(t * dt)),
-			resolve_output_path(args["output"]["data"]["a_path"] + "_" + std::to_string(t * dt)));
+			resolve_output_path(std::string(args["output"]["data"]["u_path"]) + "_" + std::to_string(t * dt)),
+			resolve_output_path(std::string(args["output"]["data"]["v_path"]) + "_" + std::to_string(t * dt)),
+			resolve_output_path(std::string(args["output"]["data"]["a_path"]) + "_" + std::to_string(t * dt)));
 		}
 	}
 
