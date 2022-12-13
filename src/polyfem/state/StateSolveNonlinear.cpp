@@ -20,6 +20,8 @@
 #include <polyfem/utils/JSONUtils.hpp>
 
 #include <ipc/ipc.hpp>
+#include <string.h>
+#include <iostream>
 
 // map BroadPhaseMethod values to JSON as strings
 namespace ipc
@@ -132,12 +134,11 @@ namespace polyfem
 			save_timestep(t0 + dt * t, t, t0, dt, sol, Eigen::MatrixXd()); // no pressure
 
 			logger().info("{}/{}  t={}", t, time_steps, t0 + dt * t);
+			solve_data.time_integrator->save_raw(
+			resolve_output_path(args["output"]["data"]["u_path"] + "_" + std::to_string(t * dt)),
+			resolve_output_path(args["output"]["data"]["v_path"] + "_" + std::to_string(t * dt)),
+			resolve_output_path(args["output"]["data"]["a_path"] + "_" + std::to_string(t * dt)));
 		}
-
-		solve_data.time_integrator->save_raw(
-			resolve_output_path(args["output"]["data"]["u_path"]),
-			resolve_output_path(args["output"]["data"]["v_path"]),
-			resolve_output_path(args["output"]["data"]["a_path"]));
 	}
 
 	void State::init_nonlinear_tensor_solve(Eigen::MatrixXd &sol, const double t)
